@@ -45,10 +45,14 @@ public class SpaceGenerator extends ChunkGenerator {
 			plugin.debug("Created planet "+e.save()+" hash "+e.toString());
 			planets.get(cp).add(e);
 		}
+		if(planets.get(cp).size()==0){
+			return result;
+		}
 		ArrayList<Planet> planetsToProcess = (ArrayList<Planet>) planets.get(cp).clone();
 		plugin.debug("Found "+planetsToProcess+" planets that have been cloned.");
 		for(int i=-2; i<3; i++){
 			for(int j=-2; j<3; j++){
+				plugin.debug("Chunk "+i+", "+j);
 				ChunkPair toCheck = new ChunkPair(chunkX+i, chunkZ+j);
 				if(!planets.containsKey(toCheck)){
 					planets.put(toCheck, new ArrayList<Planet>());
