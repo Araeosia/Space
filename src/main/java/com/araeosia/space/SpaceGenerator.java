@@ -25,17 +25,17 @@ public class SpaceGenerator extends ChunkGenerator {
 			planets.put(cp, new ArrayList<Planet>());
 		}
 		byte[][] result = new byte[world.getMaxHeight() / 16][];
-		ArrayList<Vector> planetsToGenerate = new ArrayList<>();
+		ArrayList<BlockVector> planetsToGenerate = new ArrayList<>();
 		for(int i=0; i<16; i++){
 			for(int j=0; j<world.getMaxHeight(); j++){
 				for(int k=0; k<16; k++){
-					if(random.nextInt(580000)==1337){
-						planetsToGenerate.add(new Vector(i, j, k));
+					if(random.nextInt(2000)==1337){
+						planetsToGenerate.add(new BlockVector(i, j, k));
 					}
 				}
 			}
 		}
-		for(Vector v : planetsToGenerate){
+		for(BlockVector v : planetsToGenerate){
 			int coreRadius = random.nextInt(20)+4;
 			int totalRadius = random.nextInt(20)+coreRadius;
 			int coreMaterial = getMaterial(random, false);
@@ -67,9 +67,7 @@ public class SpaceGenerator extends ChunkGenerator {
 				for(int j=0; j<world.getMaxHeight(); j++){
 					for(int k=0; k<16; k++){
 						int realZ = k+(p.getChunkZ()*16);
-						//plugin.debug("Location "+i+", "+j+", "+k+" with real of "+realX+", "+j+", "+realZ);
 						BlockVector compare = new BlockVector(realX, j, realZ);
-						plugin.debug(compare.toString()+", "+p.getVector().toString());
 						if(p.getVector().distance(compare)<=p.getCoreRadius()){
 							setBlock(result, i, j, k, p.getCoreMaterial().byteValue());
 						}else if(p.getVector().distance(compare)<=p.getTotalRadius()){
