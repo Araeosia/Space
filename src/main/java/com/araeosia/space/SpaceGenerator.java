@@ -12,6 +12,11 @@ import java.util.Random;
 
 public class SpaceGenerator extends ChunkGenerator {
 	private HashMap<ChunkPair, ArrayList<Planet>> planets = new HashMap<>();
+	private Space plugin;
+
+	public SpaceGenerator(Space plugin){
+		this.plugin = plugin;
+	}
 
 	public byte[][] generateBlockSections(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomeGrid){
 		if(!planets.containsKey(new ChunkPair(chunkX, chunkZ))){

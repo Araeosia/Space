@@ -17,8 +17,8 @@ public class Space extends JavaPlugin {
 	@Override
 	public void onEnable(){
 		logger.info("Enabling SPACCEEEEEE...");
-		spaceGenerator = new SpaceGenerator();
-		spaceListener = new SpaceListener();
+		spaceGenerator = new SpaceGenerator(this);
+		spaceListener = new SpaceListener(this);
 		getServer().getPluginManager().registerEvents(spaceListener, this);
 		if(getConfig().isConfigurationSection("planets")){
 			for(String s : getConfig().getConfigurationSection("planets").getKeys(false)){
@@ -43,6 +43,6 @@ public class Space extends JavaPlugin {
 		}
 	}
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
-		return new SpaceGenerator();
+		return spaceGenerator;
 	}
 }
