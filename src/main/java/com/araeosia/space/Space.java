@@ -8,11 +8,15 @@ import java.util.logging.Logger;
 public class Space extends JavaPlugin {
 
 	public Logger logger = getLogger();
+	public SpaceGenerator spaceGenerator;
+	public SpaceListener spaceListener;
 
 	@Override
 	public void onEnable(){
 		logger.info("Enabling SPACCEEEEEE...");
-		getServer().getPluginManager().registerEvents(new SpaceListener(), this);
+		spaceGenerator = new SpaceGenerator();
+		spaceListener = new SpaceListener();
+		getServer().getPluginManager().registerEvents(spaceListener, this);
 	}
 	@Override
 	public void onDisable(){
