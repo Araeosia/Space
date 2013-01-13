@@ -55,7 +55,6 @@ public class SpaceGenerator extends ChunkGenerator {
 						planets.put(toCheck, new ArrayList<Planet>());
 					}
 					planets.get(toCheck).addAll(planetsToProcess);
-					plugin.debug("Merged chunk "+cp.toString()+" with toCheck of "+toCheck.toString());
 				}
 			}
 		}
