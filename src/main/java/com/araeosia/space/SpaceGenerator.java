@@ -42,16 +42,27 @@ public class SpaceGenerator extends ChunkGenerator {
 			int coreZ = v.getBlockZ()+(chunkZ*16);
 			Planet e = new Planet(coreMaterial, coreRadius, shellMaterial, totalRadius, coreX, v.getBlockY(), coreZ);
 			planets.get(new ChunkPair(chunkX, chunkZ)).add(e);
+		}
+		ArrayList<Planet> planetsToProcess = new ArrayList<Planet>();
+		planetsToProcess.addAll(planets.get(new ChunkPair(chunkX, chunkZ)));
+		for(int i=-2; i<3; i++){
+			for(int j=-2; j<3; j++){
+				if(!(i==0 && j==0)){
+					ChunkPair toCheck = new ChunkPair(chunkX+i, chunkZ+j);
+					planetsToProcess.addAll(planets.get(toCheck));
+				}
+			}
+		}
+		for(Planet p : planetsToProcess){
 			for(int i=0; i<16; i++){
 				int realX = i+(chunkX*16);
 				for(int j=0; j<world.getMaxHeight(); j++){
-					int realY = j;
 					for(int k=0; k<16; k++){
 						int realZ = k+(chunkZ*16);
-						if(e.getVector().distance(new Vector(realX, realY, realZ))<=e.getCoreRadius()){
-							setBlock(result, i, j, k, e.getCoreMaterial().byteValue());
-						}else if(e.getVector().distance(new Vector(realX, realY, realZ))<=e.getTotalRadius()){
-							setBlock(result, i, j, k, e.getShellMaterial().byteValue());
+						if(p.getVector().distance(new Vector(realX, j, realZ))<=p.getCoreRadius()){
+							setBlock(result, i, j, k, p.getCoreMaterial().byteValue());
+						}else if(p.getVector().distance(new Vector(realX, j, realZ))<=p.getTotalRadius()){
+							setBlock(result, i, j, k, p.getShellMaterial().byteValue());
 						}
 					}
 				}
