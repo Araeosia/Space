@@ -10,12 +10,13 @@ import java.util.logging.Logger;
 
 public class Space extends JavaPlugin {
 
-	public Logger logger = getLogger();
+	public Logger logger;
 	public SpaceGenerator spaceGenerator;
 	public SpaceListener spaceListener;
 
 	@Override
 	public void onEnable(){
+		logger = this.getLogger();
 		logger.info("Enabling SPACCEEEEEE...");
 		spaceGenerator = new SpaceGenerator(this);
 		spaceListener = new SpaceListener(this);
