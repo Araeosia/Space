@@ -34,12 +34,6 @@ public class Space extends JavaPlugin {
 				}
 			}
 		}
-		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
-			@Override
-			public void run(){
-				Bukkit.getServer().getWorld("Space").setTime(18000L);
-			}
-		}, 200L, 200L);
 	}
 	@Override
 	public void onDisable(){
@@ -49,6 +43,7 @@ public class Space extends JavaPlugin {
 				getConfig().set("planets."+cp.toString()+"."+p.save(), true);
 			}
 		}
+		this.saveConfig();
 	}
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
 		return spaceGenerator;
