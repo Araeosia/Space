@@ -46,7 +46,7 @@ public class Planet {
 	}
 
 	public Vector getVector(){
-		return new Vector(x, y, z);
+		return new Vector(x+(chunkX*16), y, z+(chunkZ*16));
 	}
 
 	public Integer getTotalRadius() {
