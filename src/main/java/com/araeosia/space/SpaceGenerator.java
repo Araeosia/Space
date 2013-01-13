@@ -38,20 +38,19 @@ public class SpaceGenerator extends ChunkGenerator {
 			int totalRadius = random.nextInt(20)+coreRadius;
 			int coreMaterial = getMaterial(random);
 			int shellMaterial = getMaterial(random);
-			Planet e = new Planet(coreMaterial, coreRadius, shellMaterial, totalRadius, v.getBlockX(), v.getBlockY(), v.getBlockZ());
+			int coreX = v.getBlockX()+(chunkX*16);
+			int coreZ = v.getBlockZ()+(chunkZ*16);
+			Planet e = new Planet(coreMaterial, coreRadius, shellMaterial, totalRadius, coreX, v.getBlockY(), coreZ);
 			planets.get(new ChunkPair(chunkX, chunkZ)).add(e);
-			int lowerx=0;
-			int lowery=0;
-			int lowerz=0;
-			int upperx=0;
-			int uppery=0;
-			int upperz=0;
-			for(int i=lowerx; i<=upperx; i++){
-				for(int j=lowery; j<=uppery; j++){
-					for(int k=lowerz; k<=upperz; k++){
-						if(e.getVector().distance(new Vector(i, j, k))<=e.getCoreRadius()){
+			for(int i=0; i<16; i++){
+				int realX = i+(chunkX*16);
+				for(int j=0; j<world.getMaxHeight(); j++){
+					int realY = j;
+					for(int k=0; k<16; k++){
+						int realZ = k+(chunkZ*16);
+						if(e.getVector().distance(new Vector(realX, realY, realZ))<=e.getCoreRadius()){
 							setBlock(result, i, j, k, e.getCoreMaterial().byteValue());
-						}else if(e.getVector().distance(new Vector(i, j, k))<=e.getTotalRadius()){
+						}else if(e.getVector().distance(new Vector(realX, realY, realZ))<=e.getTotalRadius()){
 							setBlock(result, i, j, k, e.getShellMaterial().byteValue());
 						}
 					}
