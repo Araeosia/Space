@@ -50,7 +50,9 @@ public class SpaceGenerator extends ChunkGenerator {
 			for(int j=-2; j<3; j++){
 				if(!(i==0 && j==0)){
 					ChunkPair toCheck = new ChunkPair(chunkX+i, chunkZ+j);
-					planetsToProcess.addAll(planets.get(toCheck));
+					if(planets.get(toCheck)!=null && planets.get(toCheck).size()>0){
+						planetsToProcess.addAll(planets.get(toCheck));
+					}
 				}
 			}
 		}
