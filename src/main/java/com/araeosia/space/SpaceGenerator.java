@@ -52,7 +52,6 @@ public class SpaceGenerator extends ChunkGenerator {
 		plugin.debug("Found "+planetsToProcess+" planets that have been cloned.");
 		for(int i=-2; i<3; i++){
 			for(int j=-2; j<3; j++){
-				plugin.debug("Chunk "+i+", "+j);
 				ChunkPair toCheck = new ChunkPair(chunkX+i, chunkZ+j);
 				if(!planets.containsKey(toCheck)){
 					planets.put(toCheck, new ArrayList<Planet>());
@@ -67,6 +66,7 @@ public class SpaceGenerator extends ChunkGenerator {
 				for(int j=0; j<world.getMaxHeight(); j++){
 					for(int k=0; k<16; k++){
 						int realZ = k+(p.getChunkZ()*16);
+						plugin.debug("Checking vector "+p.getVector().toString());
 						if(p.getVector().distance(new Vector(realX, j, realZ))<=p.getCoreRadius()){
 							setBlock(result, i, j, k, p.getCoreMaterial().byteValue());
 						}else if(p.getVector().distance(new Vector(realX, j, realZ))<=p.getTotalRadius()){
