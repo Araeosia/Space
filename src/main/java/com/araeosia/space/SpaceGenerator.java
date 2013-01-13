@@ -28,7 +28,7 @@ public class SpaceGenerator extends ChunkGenerator {
 		for(int i=0; i<16; i++){
 			for(int j=0; j<world.getMaxHeight(); j++){
 				for(int k=0; k<16; k++){
-					if(random.nextInt(180000)==1337){
+					if(random.nextInt(580000)==1337){
 						planetsToGenerate.add(new Vector(i, j, k));
 					}
 				}
@@ -46,6 +46,7 @@ public class SpaceGenerator extends ChunkGenerator {
 			planets.get(cp).add(e);
 		}
 		ArrayList<Planet> planetsToProcess = (ArrayList<Planet>) planets.get(cp).clone();
+		plugin.debug("Found "+planetsToProcess+" planets that have been cloned.");
 		for(int i=-2; i<3; i++){
 			for(int j=-2; j<3; j++){
 				ChunkPair toCheck = new ChunkPair(chunkX+i, chunkZ+j);
