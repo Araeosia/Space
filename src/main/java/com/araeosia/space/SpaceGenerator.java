@@ -4,6 +4,7 @@ import com.araeosia.space.util.ChunkPair;
 import com.araeosia.space.util.Planet;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -66,11 +67,12 @@ public class SpaceGenerator extends ChunkGenerator {
 				for(int j=0; j<world.getMaxHeight(); j++){
 					for(int k=0; k<16; k++){
 						int realZ = k+(p.getChunkZ()*16);
-						plugin.debug("Location "+i+", "+j+", "+k+" with real of "+realX+", "+j+", "+realZ);
-
-						if(p.getVector().distance(new Vector(realX, j, realZ))<=p.getCoreRadius()){
+						//plugin.debug("Location "+i+", "+j+", "+k+" with real of "+realX+", "+j+", "+realZ);
+						BlockVector compare = new BlockVector(realX, j, realZ);
+						plugin.debug(compare.toString()+", "+p.getVector().toString());
+						if(p.getVector().distance(compare)<=p.getCoreRadius()){
 							setBlock(result, i, j, k, p.getCoreMaterial().byteValue());
-						}else if(p.getVector().distance(new Vector(realX, j, realZ))<=p.getTotalRadius()){
+						}else if(p.getVector().distance(compare)<=p.getTotalRadius()){
 							setBlock(result, i, j, k, p.getShellMaterial().byteValue());
 						}
 					}

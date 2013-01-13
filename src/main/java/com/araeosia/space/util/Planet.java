@@ -1,5 +1,6 @@
 package com.araeosia.space.util;
 
+import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
 public class Planet {
@@ -45,8 +46,8 @@ public class Planet {
 		return chunkZ;
 	}
 
-	public Vector getVector(){
-		return new Vector(x+(chunkX*16), y, z+(chunkZ*16));
+	public BlockVector getVector(){
+		return new BlockVector(x+(chunkX*16), y, z+(chunkZ*16));
 	}
 
 	public Integer getTotalRadius() {
