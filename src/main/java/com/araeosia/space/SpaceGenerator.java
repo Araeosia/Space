@@ -66,7 +66,8 @@ public class SpaceGenerator extends ChunkGenerator {
 				for(int j=0; j<world.getMaxHeight(); j++){
 					for(int k=0; k<16; k++){
 						int realZ = k+(p.getChunkZ()*16);
-						plugin.debug("Checking vector "+p.getVector().toString());
+						plugin.debug("Location "+i+", "+j+", "+k+" with real of "+realX+", "+j+", "+realZ);
+
 						if(p.getVector().distance(new Vector(realX, j, realZ))<=p.getCoreRadius()){
 							setBlock(result, i, j, k, p.getCoreMaterial().byteValue());
 						}else if(p.getVector().distance(new Vector(realX, j, realZ))<=p.getTotalRadius()){
