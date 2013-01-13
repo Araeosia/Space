@@ -1,0 +1,4 @@
+name: Space
+version: 1.0
+main: com.araeosia.space.Space
+load: STARTUP
