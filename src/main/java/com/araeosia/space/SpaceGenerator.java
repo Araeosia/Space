@@ -5,7 +5,6 @@ import com.araeosia.space.util.Planet;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.util.BlockVector;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ public class SpaceGenerator extends ChunkGenerator {
 		for(int i=0; i<16; i++){
 			for(int j=16; j<world.getMaxHeight()-16; j++){
 				for(int k=0; k<16; k++){
-					if(random.nextInt(300000)==1337){
+					if(random.nextInt(600000)==1337){
 						planetsToGenerate.add(new BlockVector(i, j, k));
 					}
 				}
@@ -66,10 +65,11 @@ public class SpaceGenerator extends ChunkGenerator {
 				for(int j=0; j<world.getMaxHeight(); j++){
 					for(int k=0; k<16; k++){
 						int realZ = k+(p.getChunkZ()*16);
-						BlockVector compare = new BlockVector(realX, j, realZ);
-						if(p.getVector().distance(compare)<=p.getCoreRadius()){
+
+						BlockVector c = new BlockVector(realX, j, realZ);
+						if(c.distance(p.getVector())<=p.getCoreRadius()){
 							setBlock(result, i, j, k, p.getCoreMaterial().byteValue());
-						}else if(p.getVector().distance(compare)<=p.getTotalRadius()){
+						}else if(c.distance(p.getVector())<=p.getTotalRadius()){
 							setBlock(result, i, j, k, p.getShellMaterial().byteValue());
 						}
 					}
