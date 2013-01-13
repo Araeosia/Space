@@ -20,7 +20,7 @@ public class SpaceGenerator extends ChunkGenerator {
 	}
 
 	public byte[][] generateBlockSections(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomeGrid){
-		ChunkPair cp = new ChunkPair(chunkX, chunkZ);
+		ChunkPair cp = Space.getChunk(chunkX, chunkZ);
 		if(!planets.containsKey(cp)){
 			planets.put(cp, new ArrayList<Planet>());
 		}
@@ -47,7 +47,7 @@ public class SpaceGenerator extends ChunkGenerator {
 			planets.get(cp).add(e);
 			for(int i=-2; i<3; i++){
 				for(int j=-2; j<3; j++){
-					ChunkPair toCheck = new ChunkPair(chunkX+i, chunkZ+j);
+					ChunkPair toCheck = Space.getChunk(chunkX+i, chunkZ+j);
 					if(!planets.containsKey(toCheck)){
 						planets.put(toCheck, new ArrayList<Planet>());
 					}

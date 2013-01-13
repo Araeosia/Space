@@ -14,6 +14,7 @@ public class Space extends JavaPlugin {
 	public Logger logger;
 	public SpaceGenerator spaceGenerator;
 	public SpaceListener spaceListener;
+	private static ArrayList<ChunkPair> chunks = new ArrayList<>();
 
 	@Override
 	public void onEnable(){
@@ -25,7 +26,7 @@ public class Space extends JavaPlugin {
 		if(getConfig().isConfigurationSection("planets")){
 			for(String s : getConfig().getConfigurationSection("planets").getKeys(false)){
 				String[] data = s.split("§");
-				ChunkPair cp = new ChunkPair(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
+				ChunkPair cp = Space.getChunk(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
 				if(!spaceGenerator.getPlanets().containsKey(cp)){
 					spaceGenerator.getPlanets().put(cp, new ArrayList<Planet>());
 				}
@@ -52,5 +53,15 @@ public class Space extends JavaPlugin {
 	}
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
 		return spaceGenerator;
+	}
+	public static ChunkPair getChunk(int x, int z){
+		for(ChunkPair cp : Space.chunks){
+			if(cp.getX()==x && cp.getZ()==z){
+				return cp;
+			}
+		}
+		ChunkPair cp = new ChunkPair(x, z);
+		Space.chunks.add(cp);
+		return cp;
 	}
 }
