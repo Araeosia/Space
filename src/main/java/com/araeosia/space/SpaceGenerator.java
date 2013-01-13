@@ -29,7 +29,7 @@ public class SpaceGenerator extends ChunkGenerator {
 		for(int i=0; i<16; i++){
 			for(int j=0; j<world.getMaxHeight(); j++){
 				for(int k=0; k<16; k++){
-					if(random.nextInt(2000)==1337){
+					if(random.nextInt(300000)==1337){
 						planetsToGenerate.add(new BlockVector(i, j, k));
 					}
 				}
@@ -45,22 +45,21 @@ public class SpaceGenerator extends ChunkGenerator {
 			Planet e = new Planet(coreMaterial, coreRadius, shellMaterial, totalRadius, coreX, v.getBlockY(), coreZ, chunkX, chunkZ);
 			plugin.debug("Created planet "+e.save()+" hash "+e.toString());
 			planets.get(cp).add(e);
+			for(int i=-2; i<3; i++){
+				for(int j=-2; j<3; j++){
+					ChunkPair toCheck = new ChunkPair(chunkX+i, chunkZ+j);
+					if(!planets.containsKey(toCheck)){
+						planets.put(toCheck, new ArrayList<Planet>());
+					}
+					planets.get(toCheck).add(e);
+					plugin.debug("Added planet "+e.save()+" to "+toCheck);
+				}
+			}
 		}
 		if(planets.get(cp).size()==0){
 			return result;
 		}
-		ArrayList<Planet> planetsToProcess = (ArrayList<Planet>) planets.get(cp).clone();
-		plugin.debug("Found "+planetsToProcess+" planets that have been cloned.");
-		for(int i=-2; i<3; i++){
-			for(int j=-2; j<3; j++){
-				ChunkPair toCheck = new ChunkPair(chunkX+i, chunkZ+j);
-				if(!planets.containsKey(toCheck)){
-					planets.put(toCheck, new ArrayList<Planet>());
-				}
-				planets.get(toCheck).addAll(planetsToProcess);
-			}
-		}
-		for(Planet p : planetsToProcess){
+		for(Planet p : planets.get(cp)){
 			plugin.debug("Currently working with "+p.save()+" hash "+p.toString());
 			for(int i=0; i<16; i++){
 				int realX = i+(p.getChunkX()*16);
