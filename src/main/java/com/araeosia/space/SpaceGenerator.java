@@ -19,8 +19,9 @@ public class SpaceGenerator extends ChunkGenerator {
 	}
 
 	public byte[][] generateBlockSections(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomeGrid){
-		if(!planets.containsKey(new ChunkPair(chunkX, chunkZ))){
-			planets.put(new ChunkPair(chunkX, chunkZ), new ArrayList<Planet>());
+		ChunkPair cp = new ChunkPair(chunkX, chunkZ);
+		if(!planets.containsKey(cp)){
+			planets.put(cp, new ArrayList<Planet>());
 		}
 		byte[][] result = new byte[world.getMaxHeight() / 16][];
 		ArrayList<Vector> planetsToGenerate = new ArrayList<>();
@@ -41,10 +42,10 @@ public class SpaceGenerator extends ChunkGenerator {
 			int coreX = v.getBlockX()+(chunkX*16);
 			int coreZ = v.getBlockZ()+(chunkZ*16);
 			Planet e = new Planet(coreMaterial, coreRadius, shellMaterial, totalRadius, coreX, v.getBlockY(), coreZ);
-			planets.get(new ChunkPair(chunkX, chunkZ)).add(e);
+			planets.get(cp).add(e);
 		}
 		ArrayList<Planet> planetsToProcess = new ArrayList<Planet>();
-		planetsToProcess.addAll(planets.get(new ChunkPair(chunkX, chunkZ)));
+		planetsToProcess.addAll(planets.get(cp));
 		for(int i=-2; i<3; i++){
 			for(int j=-2; j<3; j++){
 				if(!(i==0 && j==0)){
