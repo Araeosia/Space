@@ -27,7 +27,7 @@ public class SpaceGenerator extends ChunkGenerator {
 		byte[][] result = new byte[world.getMaxHeight() / 16][];
 		ArrayList<BlockVector> planetsToGenerate = new ArrayList<>();
 		for(int i=0; i<16; i++){
-			for(int j=0; j<world.getMaxHeight(); j++){
+			for(int j=16; j<world.getMaxHeight()-16; j++){
 				for(int k=0; k<16; k++){
 					if(random.nextInt(300000)==1337){
 						planetsToGenerate.add(new BlockVector(i, j, k));
