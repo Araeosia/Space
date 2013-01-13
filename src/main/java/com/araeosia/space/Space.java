@@ -45,6 +45,11 @@ public class Space extends JavaPlugin {
 		}
 		this.saveConfig();
 	}
+	public void debug(String s){
+		if(getConfig().getBoolean("debug") || true){
+			logger.info("Debug - "+s);
+		}
+	}
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
 		return spaceGenerator;
 	}

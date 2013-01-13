@@ -42,6 +42,7 @@ public class SpaceGenerator extends ChunkGenerator {
 			int coreX = v.getBlockX()+(chunkX*16);
 			int coreZ = v.getBlockZ()+(chunkZ*16);
 			Planet e = new Planet(coreMaterial, coreRadius, shellMaterial, totalRadius, coreX, v.getBlockY(), coreZ, chunkX, chunkZ);
+			plugin.debug("Created planet "+e.save()+" hash "+e.toString());
 			planets.get(cp).add(e);
 		}
 		ArrayList<Planet> planetsToProcess = new ArrayList<>();
@@ -54,11 +55,12 @@ public class SpaceGenerator extends ChunkGenerator {
 						planets.put(toCheck, new ArrayList<Planet>());
 					}
 					planets.get(toCheck).addAll(planetsToProcess);
+					plugin.debug("Merged chunk "+cp.toString()+" with toCheck of "+toCheck.toString());
 				}
 			}
 		}
 		for(Planet p : planetsToProcess){
-			plugin.logger.info("Currently working with chunk ("+chunkX+", "+chunkZ+") and processing planet from chunk ("+p.getChunkX()+", "+p.getChunkZ()+")");
+			plugin.debug("Currently working with "+p.save()+" hash "+p.toString());
 			for(int i=0; i<16; i++){
 				int realX = i+(p.getChunkX()*16);
 				for(int j=0; j<world.getMaxHeight(); j++){
