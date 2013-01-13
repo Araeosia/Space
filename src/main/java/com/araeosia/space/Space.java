@@ -2,6 +2,7 @@ package com.araeosia.space;
 
 import com.araeosia.space.util.ChunkPair;
 import com.araeosia.space.util.Planet;
+import org.bukkit.Bukkit;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -33,6 +34,12 @@ public class Space extends JavaPlugin {
 				}
 			}
 		}
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
+			@Override
+			public void run(){
+				Bukkit.getServer().getWorld("Space").setTime(18000L);
+			}
+		}, 200L, 200L);
 	}
 	@Override
 	public void onDisable(){

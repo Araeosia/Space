@@ -37,8 +37,8 @@ public class SpaceGenerator extends ChunkGenerator {
 		for(Vector v : planetsToGenerate){
 			int coreRadius = random.nextInt(20)+4;
 			int totalRadius = random.nextInt(20)+coreRadius;
-			int coreMaterial = getMaterial(random);
-			int shellMaterial = getMaterial(random);
+			int coreMaterial = getMaterial(random, false);
+			int shellMaterial = getMaterial(random, true);
 			int coreX = v.getBlockX()+(chunkX*16);
 			int coreZ = v.getBlockZ()+(chunkZ*16);
 			Planet e = new Planet(coreMaterial, coreRadius, shellMaterial, totalRadius, coreX, v.getBlockY(), coreZ);
@@ -74,48 +74,90 @@ public class SpaceGenerator extends ChunkGenerator {
 		return result;
 	}
 
-	private int getMaterial(Random r) {
+	private int getMaterial(Random r, boolean shell) {
 		int number = r.nextInt(1000);
-		if(number<5){
-			return 56;
-		}else if(number>=5 && number<15){
-			return 14;
-		}else if(number>=15 && number<30){
-			return 15;
-		}else if(number>=30 && number<100){
-			return 1;
-		}else if(number>=100 && number<175){
-			return 10;
-		}else if(number>=175 && number<250){
-			return 8;
-		}else if(number>=250 && number<275){
-			return 16;
-		}else if(number>=275 && number<325){
-			return 25;
-		}else if(number>=325 && number<375){
-			return 7;
-		}else if(number>=375 && number<450){
-			return 89;
-		}else if(number>=450 && number<525){
-			return 45;
-		}else if(number>=525 && number<575){
-			return 73;
-		}else if(number>=575 && number<650){
-			return 0;
-		}else if(number>=650 && number<700){
-			return 85;
-		}else if(number>=700 && number<800){
-			return 3;
-		}else if(number>=800 && number<850){
-			return 98;
-		}else if(number>=850 && number<900){
-			return 48;
-		}else if(number>=900 && number<933){
-			return 49;
-		}else if(number>=933 && number<966){
-			return 47;
+		if(shell){
+			if(number<5){
+				return 56;
+			}else if(number>=5 && number<15){
+				return 14;
+			}else if(number>=15 && number<30){
+				return 15;
+			}else if(number>=30 && number<125){
+				return 1;
+			}else if(number>=125 && number<250){
+				return 20;
+			}else if(number>=250 && number<275){
+				return 16;
+			}else if(number>=275 && number<325){
+				return 25;
+			}else if(number>=325 && number<375){
+				return 82;
+			}else if(number>=375 && number<450){
+				return 89;
+			}else if(number>=450 && number<525){
+				return 45;
+			}else if(number>=525 && number<575){
+				return 73;
+			}else if(number>=575 && number<650){
+				return 0;
+			}else if(number>=650 && number<700){
+				return 86;
+			}else if(number>=700 && number<800){
+				return 3;
+			}else if(number>=800 && number<850){
+				return 98;
+			}else if(number>=850 && number<900){
+				return 48;
+			}else if(number>=900 && number<933){
+				return 49;
+			}else if(number>=933 && number<966){
+				return 47;
+			}else{
+				return 121;
+			}
 		}else{
-			return 121;
+			if(number<5){
+				return 56;
+			}else if(number>=5 && number<15){
+				return 14;
+			}else if(number>=15 && number<30){
+				return 15;
+			}else if(number>=30 && number<100){
+				return 1;
+			}else if(number>=100 && number<175){
+				return 10;
+			}else if(number>=175 && number<250){
+				return 8;
+			}else if(number>=250 && number<275){
+				return 16;
+			}else if(number>=275 && number<325){
+				return 25;
+			}else if(number>=325 && number<375){
+				return 7;
+			}else if(number>=375 && number<450){
+				return 89;
+			}else if(number>=450 && number<525){
+				return 45;
+			}else if(number>=525 && number<575){
+				return 73;
+			}else if(number>=575 && number<650){
+				return 0;
+			}else if(number>=650 && number<700){
+				return 86;
+			}else if(number>=700 && number<800){
+				return 3;
+			}else if(number>=800 && number<850){
+				return 98;
+			}else if(number>=850 && number<900){
+				return 48;
+			}else if(number>=900 && number<933){
+				return 49;
+			}else if(number>=933 && number<966){
+				return 47;
+			}else{
+				return 121;
+			}
 		}
 	}
 
