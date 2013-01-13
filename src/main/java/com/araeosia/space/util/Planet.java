@@ -1,5 +1,7 @@
 package com.araeosia.space.util;
 
+import org.bukkit.util.Vector;
+
 public class Planet {
 	private int x;
 	private int y;
@@ -19,31 +21,35 @@ public class Planet {
 		this.z = z;
 	}
 
-	public int getX() {
+	public Integer getX() {
 		return x;
 	}
 
-	public int getY() {
+	public Integer getY() {
 		return y;
 	}
 
-	public int getZ() {
+	public Integer getZ() {
 		return z;
 	}
 
-	public int getTotalRadius() {
+	public Vector getVector(){
+		return new Vector(x, y, z);
+	}
+
+	public Integer getTotalRadius() {
 		return totalRadius;
 	}
 
-	public int getCoreRadius() {
+	public Integer getCoreRadius() {
 		return coreRadius;
 	}
 
-	public int getShellMaterial() {
+	public Integer getShellMaterial() {
 		return shellMaterial;
 	}
 
-	public int getCoreMaterial() {
+	public Integer getCoreMaterial() {
 		return coreMaterial;
 	}
 	public static Planet load(String s){

@@ -40,6 +40,23 @@ public class SpaceGenerator extends ChunkGenerator {
 			int shellMaterial = getMaterial(random);
 			Planet e = new Planet(coreMaterial, coreRadius, shellMaterial, totalRadius, v.getBlockX(), v.getBlockY(), v.getBlockZ());
 			planets.get(new ChunkPair(chunkX, chunkZ)).add(e);
+			int lowerx=0;
+			int lowery=0;
+			int lowerz=0;
+			int upperx=0;
+			int uppery=0;
+			int upperz=0;
+			for(int i=lowerx; i<=upperx; i++){
+				for(int j=lowery; j<=uppery; j++){
+					for(int k=lowerz; k<=upperz; k++){
+						if(e.getVector().distance(new Vector(i, j, k))<=e.getCoreRadius()){
+							setBlock(result, i, j, k, e.getCoreMaterial().byteValue());
+						}else if(e.getVector().distance(new Vector(i, j, k))<=e.getTotalRadius()){
+							setBlock(result, i, j, k, e.getShellMaterial().byteValue());
+						}
+					}
+				}
+			}
 		}
 		return result;
 	}
